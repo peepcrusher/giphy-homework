@@ -43,16 +43,16 @@ $("#add-topic").on("click", function (event) {
 
 //add click listener for any button
 $(document).on("click", "button", function () {
-
+//variables for getting user data and putting it into a url for AJAX
     var topic = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         topic + "&api_key=dc6zaTOxFJmzC&limit=10";
-
+//ajax call
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        // console.log(response.data);
+        console.log(response.data);
         var results = response.data
         for (i = 0; i < results.length; i++) {
             console.log(results[i]);
@@ -60,18 +60,22 @@ $(document).on("click", "button", function () {
             var gifDiv = $("<div>");
             var newImg = $("<img>");
             var newP = $("<p>")
+            //simplify response
             var rating = results[i].rating
+            //adding attributes to the IMG tag to allow for on click play and pausing
             newImg.attr("src", results[i].images.fixed_height_still.url);
             newImg.attr("paused", results[i].images.fixed_height_still.url);
             newImg.attr("play", results[i].images.fixed_height.url)
             newImg.attr("data-state", "still");
+            //added class for styling with bootstrap, also to grab onto for onClick pause and play
             newImg.addClass("giphy");
             gifDiv.addClass("float-left m-3");
+            //appending the newImg to the GifDiv
             gifDiv.append(newImg);
             newP.append("Rating: " + rating);
             newP.addClass("bg-light");
             gifDiv.append(newP);
-            if(rating !== "pg-13" || rating !== "r"){
+            if(rating === "g" || rating === "pg"){
             $("#gifs-go-here").prepend(gifDiv);
             }
     
