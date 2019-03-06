@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/css/style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
@@ -8,21 +9,27 @@
 
 
 
-<div class="buttons-go-here"></div>
+<div class="buttons-go-here center"></div>
+
+<div class="container">
+<div class="jumbotron">
+        <div class="container">
+            <h1 class="text-center">Add a cartoon!</h1>
+                <form id="search" class="center">
+                        <label for="gif-search"></label>
+                        <input type="text" id="gif-search"><br>
+                        <input id="add-topic" type="submit" value="Add it!">
+                        </form>
+        </div>
+      </div>
+    
 
 
-<form id="search">
-        <label for="gif-search">Add a Topic</label>
-        <input type="text" id="gif-search"><br>
-        <input id="add-topic" type="submit" value="Add a Gif">
-        </form>
-
-<div class="gifs-go-here"></div>
+<div id="gifs-go-here"></div>
 
 
 
-
-
+</div>
 
             <script src="assets/javascript/javascript.js"></script>
     </body>

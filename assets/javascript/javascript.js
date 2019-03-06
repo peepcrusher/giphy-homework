@@ -19,12 +19,12 @@ function renderButtons() {
         //create a variable that will create a new button
         var newButton = $("<button>")
         //add attributes to the newButton variable
-        newButton.addClass("giphy");
+        newButton.addClass("giphy btn btn-info m-2");
+        
         newButton.attr("data-name", topics[i]);
         newButton.text(topics[i]);
         //append the new buttons to the buttons div
         $(".buttons-go-here").append(newButton);
-        console.log("data-name", topics[i]);
     }
 
 }
@@ -36,11 +36,13 @@ $("#add-topic").on("click", function (event) {
 
     //push the userInput into the topics array
     topics.push(userInput);
+    $("#gif-search").empty();
+    
     renderButtons();
 });
 
 //add click listener for any button
-$("button").on("click", function () {
+$(document).on("click", "button", function () {
 
     var topic = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
@@ -48,14 +50,55 @@ $("button").on("click", function () {
 
     $.ajax({
         url: queryURL,
-        method : "GET"
+        method: "GET"
     }).then(function (response) {
-        console.log(response);
+        // console.log(response.data);
+        var results = response.data
+        for (i = 0; i < results.length; i++) {
+            console.log(results[i]);
+            //create variables for a gif div, image tag, and
+            var gifDiv = $("<div>");
+            var newImg = $("<img>");
+            var newP = $("<p>")
+            var rating = results[i].rating
+            newImg.attr("src", results[i].images.fixed_height_still.url);
+            newImg.attr("paused", results[i].images.fixed_height_still.url);
+            newImg.attr("play", results[i].images.fixed_height.url)
+            newImg.attr("data-state", "still");
+            newImg.addClass("giphy");
+            gifDiv.addClass("float-left m-3");
+            gifDiv.append(newImg);
+            newP.append("Rating: " + rating);
+            newP.addClass("bg-light");
+            gifDiv.append(newP);
+            if(rating !== "pg-13" || rating !== "r"){
+            $("#gifs-go-here").prepend(gifDiv);
+            }
+    
+
+        }
+        
+
     });
-    renderButtons();
+
+    
 })
 
+$(document).on("click", ".giphy", function(){
+    var state = $(this).attr("data-state")
+
+    if(state === "still"){
+        $(this).attr("src", $(this).attr("play"))
+        $(this).attr("data-state", "animate")
+    }
+    else{
+        $(this).attr("src", $(this).attr("paused"))
+        $(this).attr("data-state", "still")
+    }
+    })
 
 
+
+renderButtons();
 
 
