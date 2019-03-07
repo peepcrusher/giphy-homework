@@ -1,8 +1,8 @@
 # Homework number: 6 AJAX and GIF's
 
-##Samuel Thompson
+## Samuel Thompson
 
-###Process
+### Process
 
 in this assignment, I was instructed to build a website that had buttons that would generate gifs from the GIPHY API, and have the user, able to generate more buttons via inputs. the only things that were hard coded into the HTML were the inputs from the user, and the title for that input. 
 
@@ -15,7 +15,7 @@ The gif's also pause and play on click. I did this by assigning the img tag an a
 
 ![Webpage](/assets/images/Webpage.jpg)
 
-###Built with
+### Built with
 
 *HTML
 *CSS
